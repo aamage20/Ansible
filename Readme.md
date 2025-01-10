@@ -65,3 +65,29 @@ ansible all -m ping
 ansible-playbook nginx.yaml
 ````
 
+
+## Creating nginx.yaml file
+
+````
+- name: update and install and nginx
+  hosts: all
+  become: true
+
+  tasks:
+   
+  - name: Upgrade all packages
+    apt:
+     name: '*'
+     state: latest
+      
+  - name: Install the latest version of nginx
+    apt:
+     name: nginx
+     state: latest
+      
+  - name: Start nginx
+    service:
+     name:  nginx
+     state: started
+     enabled: true
+````
